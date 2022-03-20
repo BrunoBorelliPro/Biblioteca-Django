@@ -69,7 +69,8 @@ class ReservaAdminDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = "core/delete.html"
     
 
-class AutorListView(ListView):
+class AutorListView(PermissionRequiredMixin, ListView):
+    permission_required = 'core.autor.action_all'
     model = Autor
     template_name = "core/autor/autor_list.html"
 
@@ -100,17 +101,19 @@ class LivrosListView(ListView):
     template_name = 'core/livro/todos_os_livros.html'
 
 class LivroCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = 'core.livro.action_all'
+    permission_required = 'core.Livro.action_all'
     template_name = "core/livro/livro_form.html"
     model = Livro
     fields = '__all__'
 
-class LivroUpdateView(UpdateView):
+class LivroUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'core.Livro.action_all'
     model = Livro
     template_name = "core/livro/livro_form.html"
     fields = '__all__'
 
-class LivroDeleteView(DeleteView):
+class LivroDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'core.Livro.action_all'
     model = Livro
     template_name = "core/delete.html"
 

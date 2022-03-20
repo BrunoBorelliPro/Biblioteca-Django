@@ -153,6 +153,4 @@ cython_debug/
 #.idea/
 
 
-media/
-
 static_root/

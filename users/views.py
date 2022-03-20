@@ -13,12 +13,12 @@ class UsersListView(PermissionRequiredMixin, ListView):
     model = User
     context_object_name = "user_view"
 
-class UserCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = 'users.user.action_all'
+class UserCreateView(CreateView):
     form_class = UserCreationForm
     model = User
     template_name = "users/cadastro_users.html"
     context_object_name = "user_view"
+    success_url = '/'
 
 class UserUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'users.user.action_all'
@@ -26,6 +26,7 @@ class UserUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = "users/update_users.html"
     fields = ['username', 'first_name', 'last_name', 'email']
     context_object_name = "user_view"
+    success_url = '/'
 
 
 class UserDeleteView(PermissionRequiredMixin, DeleteView):
