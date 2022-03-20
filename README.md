@@ -21,3 +21,12 @@
 1. Execute o comando: `python manage.py createsuperuser`;
 
 1. Execute o comando: `python manage.py runserver`;
+
+
+## To-Do
+
+1. Campo para adicionar autor junto com o livro
+
+1. Feedbacks para o usuário
+
+1. API isbn
