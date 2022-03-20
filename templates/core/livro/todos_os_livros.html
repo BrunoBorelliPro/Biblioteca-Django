@@ -1,9 +1,12 @@
 {% extends user.is_staff|yesno:'painel_admin/base_admin.html,base.html' %}
 {% block main %}
-    <h1>Lista de Livros</h1>
+<div class="row">
+    <h1 class="col-md-4">Lista de Livros</h1>
     {% if user.is_staff %}
-        <a href="{% url 'core:create_livro' %}"><button class="btn btn-primary">Adicionar novo livro</button></a>
+        <a class="col-md-3" href="{% url 'core:create_livro' %}"><button class="btn btn-primary">Adicionar novo livro</button></a>
     {% endif %}
+</div>
+
     <div class="row row-cols-2 row-cols-md-0 g-4">
         {% for livro in livro_list %}
             <div class="col" >
