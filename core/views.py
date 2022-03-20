@@ -46,6 +46,7 @@ class LivrosDisponiveisListView(ListView):
 class ReservasListView(PermissionRequiredMixin, ListView):
     permission_required = 'core.reserva.action_all'
     model = Reserva
+    template_name = 'painel_admin/reserva_list.html'
 
 class UserReservasListView(LoginRequiredMixin, ListView):
     model = Reserva
@@ -66,32 +67,32 @@ class ReservaAdminDeleteView(PermissionRequiredMixin, DeleteView):
 
     model = Reserva
     success_url = '/biblioteca/reservas/'
-    template_name = "core/delete.html"
+    template_name = "painel_admin/delete.html"
     
 
 class AutorListView(PermissionRequiredMixin, ListView):
     permission_required = 'core.autor.action_all'
     model = Autor
-    template_name = "core/autor/autor_list.html"
+    template_name = "painel_admin/autor/autor_list.html"
 
 class AutorCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'core.autor.action_all'
     model = Autor
     fields = '__all__'
-    template_name = "core/autor/autor_form.html"
+    template_name = "painel_admin/autor/autor_form.html"
     success_url = '/biblioteca/list_autor/'
 
 
 class AutorUpdateView(UpdateView):
     model = Autor
-    template_name = "core/autor/autor_form.html"
+    template_name = "painel_admin/autor/autor_form.html"
     fields = '__all__'
     success_url = '/biblioteca/list_autor/'
 
 
 class AutorDeleteView(DeleteView):
     model = Autor
-    template_name = "core/delete.html"
+    template_name = "painel_admin/delete.html"
     success_url = '/biblioteca/list_autor/'
 
 
