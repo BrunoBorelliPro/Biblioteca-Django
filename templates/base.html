@@ -1,3 +1,11 @@
+{% load static %}
+{% load bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,27 +13,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Biblioteca{% endblock title %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?{% now "U" %}">
+    <link rel="shortcut icon" href="{% static 'img/book.ico' %}" type="image/x-icon">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home:home' %}">Biblioteca</a>
+            <a class="navbar-brand" href="{% url 'home:home' %}"><img src="{% static 'img/book-icon.png' %}" />Biblioteca</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{% url 'core:livros' %}">Livros</a>
-                {% comment %} <a class="nav-link" href="{% url 'core:emprestimos' %}">Emprestar Livro</a>
-                <a class="nav-link" href="{% url 'core:usuarios' %}">Cadastrar Usuários</a> {% endcomment %}
-            </div>
+                <div class="navbar-nav">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'core:livros_disponiveis' %}">Livros Disponíveis</a></li>
+                        {% if user.is_staff %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'core:visualizar_reservas' %}">Livros Reservados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'users:list_users' %}">Usuários</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Autores
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'core:list_autor' %}">Lista de autores</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'core:create_autor' %}">Adicionar autores</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'core:list_livro' %}">Todos os Livros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'core:minhas_reservas' %}">Minhas Reservas</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link d-flex" href="{% url 'logout' %}">{{user}}|Logout</a></li>
+                        {% else %}
+                            <li class="nav-item d-flex">
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                <a class="nav-link" href="{% url 'users:cadastro_users' %}">Cadastrar</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
-    {% block main %}
-    
-    {% endblock main %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <div class="container">
+            {% block main %}
+            {% endblock main %}
+        </div>
 </body>
 </html>

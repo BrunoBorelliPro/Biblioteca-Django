@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+    <h1>Minhas reservas</h1>
+    <div class="row row-cols-2 row-cols-md-0 g-4">
+        {% for reserva in reserva_list %}
+            <div class="col">
+                <div class="card" style="max-width: 640px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{reserva.livro.capa.url}}" class="img-fluid rounded-start" alt="...">
+                            <a class="btn btn-danger" href="{% url 'core:deletar_reserva' pk=reserva.id %}">Cancelar reserva</a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{reserva.livro.titulo}}</h5>
+                                <p class="card-text">{{reserva.livro.sinopse}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>   
+{% endblock main %}

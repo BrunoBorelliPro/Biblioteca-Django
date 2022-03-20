@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+
+{% block main %}
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Realmente deseja deletar "{{ object }}"?</p>
+        {% bootstrap_form form %}
+        {% buttons %}
+        <input class="btn btn-danger" type="submit" value="Deletar">
+        {% endbuttons %}
+    </form>
+
+{% endblock main %}

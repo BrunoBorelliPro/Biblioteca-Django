@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block main %}
+    <h1>Lista de Livros</h1>
+    {% if user.is_staff %}
+        <a href="{% url 'core:create_livro' %}"><button class="btn btn-primary">Adicionar novo livro</button></a>
+    {% endif %}
+    <div class="row row-cols-2 row-cols-md-0 g-4">
+        {% for livro in livro_list %}
+            <div class="col" >
+                <div class="card" style="max-width: 640px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{livro.capa.url}}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{livro.titulo}}</h5>
+                                <p class="card-text">{{livro.sinopse}}</p>
+                                <a href="{{livro.get_absolute_url}}" class="btn btn-primary">Visualizar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>   
+{% endblock main %}

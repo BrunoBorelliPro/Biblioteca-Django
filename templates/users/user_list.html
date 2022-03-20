@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block main %}
+    {% for u in user_view %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{u}}</h5>
+            {% if u.is_superuser %}
+                <h6 class="card-subtitle mb-2 text-muted">Admin</h6>
+            {% endif %}
+            
+            <a href="{% url 'users:update_users' pk=u.id %}" class="btn">Editar</a>
+            <a href="{% url 'users:delete_users' pk=u.id %}" class="btn btn-danger">Deletar</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock main %}

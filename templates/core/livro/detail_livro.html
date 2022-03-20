@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="text-center">
+    <h1>{{livro}}</h1>
+    <h6>Escrito por: <strong>{{livro.autor}}</strong></h6>
+    <img src="{{livro.capa.url}}" class="rounded" alt="Capa do livro: '{{livro}}'" style="max-width: 20vw;">
+    <h3>Sinopse:</h3>
+    <p>{{livro.sinopse}}</p>
+    <a class="btn btn-warning" href="{% url 'core:update_livro' pk=livro.pk %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'core:delete_livro' pk=livro.pk %}">Deletar</a>
+
+</div>
+{% endblock main %}
