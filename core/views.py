@@ -44,7 +44,7 @@ class LivrosDisponiveisListView(ListView):
 
 
 class ReservasListView(PermissionRequiredMixin, ListView):
-    permission_required = 'core.reserva.action_all'
+    permission_required = 'is_staff'
     model = Reserva
     template_name = 'painel_admin/reserva_list.html'
 
@@ -63,7 +63,7 @@ class ReservaDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "core/delete.html"
 
 class ReservaAdminDeleteView(PermissionRequiredMixin, DeleteView):
-    permission_required = 'core.reserva.action_all'
+    permission_required = 'is_staff'
 
     model = Reserva
     success_url = '/biblioteca/reservas/'
@@ -71,29 +71,30 @@ class ReservaAdminDeleteView(PermissionRequiredMixin, DeleteView):
     
 
 class AutorListView(PermissionRequiredMixin, ListView):
-    permission_required = 'core.autor.action_all'
+    permission_required = 'is_staff'
     model = Autor
     template_name = "painel_admin/autor/autor_list.html"
 
 class AutorCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = 'core.autor.action_all'
+    permission_required = 'is_staff'
     model = Autor
     fields = '__all__'
     template_name = "painel_admin/autor/autor_form.html"
     success_url = '/biblioteca/list_autor/'
 
 
-class AutorUpdateView(UpdateView):
+class AutorUpdateView(PermissionRequiredMixin, UpdateView):
     model = Autor
     template_name = "painel_admin/autor/autor_form.html"
     fields = '__all__'
     success_url = '/biblioteca/list_autor/'
+    permission_required = 'is_staff'
 
-
-class AutorDeleteView(DeleteView):
+class AutorDeleteView(PermissionRequiredMixin, DeleteView):
     model = Autor
     template_name = "painel_admin/delete.html"
     success_url = '/biblioteca/list_autor/'
+    permission_required = 'is_staff'
 
 
 
@@ -102,19 +103,19 @@ class LivrosListView(ListView):
     template_name = 'core/livro/todos_os_livros.html'
 
 class LivroCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = 'core.Livro.action_all'
+    permission_required = 'is_staff'
     template_name = "core/livro/livro_form.html"
     model = Livro
     fields = '__all__'
 
 class LivroUpdateView(PermissionRequiredMixin, UpdateView):
-    permission_required = 'core.Livro.action_all'
+    permission_required = 'is_staff'
     model = Livro
     template_name = "core/livro/livro_form.html"
     fields = '__all__'
 
 class LivroDeleteView(PermissionRequiredMixin, DeleteView):
-    permission_required = 'core.Livro.action_all'
+    permission_required = 'is_staff'
     model = Livro
     template_name = "core/delete.html"
 
