@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 class Autor(models.Model):
 
     nome = models.CharField(max_length=100)
@@ -24,16 +24,25 @@ class Livro(models.Model):
     class Meta:
         verbose_name = 'Livro'
         verbose_name_plural = 'Livros'
+    
+    def get_absolute_url(self):
+        return reverse("core:detail_livro", kwargs={"pk": self.pk})
 
-class Emprestimo(models.Model):
+class Reserva(models.Model):
 
-    user = models.ForeignKey("users.user", on_delete=models.CASCADE)
-    livro = models.ForeignKey("Livro", on_delete=models.CASCADE)
-    ativo = models.BooleanField()
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    livro = models.ForeignKey("core.Livro", on_delete=models.CASCADE)
+    reservado = models.BooleanField(default=True)
+
     class Meta:
-        verbose_name = "Emprestimo"
-        verbose_name_plural = "Emprestimos"
+        verbose_name = "Reserva"
+        verbose_name_plural = "Reservas"
 
     def __str__(self):
-        return f'{self.livro} - {self.user}'
+        return f'{self.user} | {self.livro}'
+
+    def get_absolute_url(self):
+        return reverse("core:deletar_reserva", kwargs={"pk": self.pk})
+    
+
 
