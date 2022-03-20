@@ -1,12 +1,15 @@
-from django.views.generic import ListView
+from dataclasses import fields
+from pyexpat import model
+from django.views.generic import ListView, CreateView
 
-from core.models import Livros
+from core.models import Livro, Emprestimo
 
 class LivrosListView(ListView):
-    model = Livros
+    model = Livro
+
+class LivrosCreateView(CreateView):
+    model = Livro
+    fields = '__all__'
 
 class EmprestimosListView(ListView):
-    model = Livros
-
-class UsuariosListView(ListView):
-    model = Livros
+    model = Emprestimo
