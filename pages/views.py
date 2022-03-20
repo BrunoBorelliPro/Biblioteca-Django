@@ -4,13 +4,8 @@ from django.views.generic import TemplateView
 
 from users.models import User
 
-def home_page(request):
-    if not request.user.is_anonymous:
-        user = User.objects.get(username=request.user)
-    else:
-        user = False
-    context = {
-        'user': user
-    }
-    print(request.user)
-    return render(request, 'home.html', context)
+class HomePageView(TemplateView):
+    template_name = "home.html"
+
+class AdminView(TemplateView):
+    template_name = "painel_admin/home_admin.html"

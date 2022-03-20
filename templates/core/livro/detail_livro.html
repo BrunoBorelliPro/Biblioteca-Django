@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends user.is_staff|yesno:'painel_admin/base_admin.html,base.html' %}
+
 
 {% block main %}
 <div class="text-center">
