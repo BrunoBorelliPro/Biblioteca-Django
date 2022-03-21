@@ -20,7 +20,7 @@
 
 1. Execute o comando: `python manage.py loaddata seed.json`
 
-1. Execute o comando: `python manage.py createsuperuser`;
+1. Execute o comando: `python manage.py createsuperuser`; (Este comando cria um usuário administrador)
 
 1. Execute o comando: `python manage.py runserver`;
 
