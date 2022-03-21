@@ -1,14 +1,12 @@
-from multiprocessing import context
-from pyexpat import model
-
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 
 from core.models import Autor, Livro, Reserva
 from users.models import User
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.utils.decorators import method_decorator
+
 class LivrosDisponiveisListView(ListView):
     model = Livro
     @method_decorator(login_required)
