@@ -116,6 +116,7 @@ class LivroDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'is_staff'
     model = Livro
     template_name = "core/delete.html"
+    success_url = '/biblioteca/list_livro/'
 
 class LivroDetailView(DetailView):
     model = Livro
